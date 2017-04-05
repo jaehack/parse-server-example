@@ -20,6 +20,13 @@ var api = new ParseServer({
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
+  push:{
+    ios: {
+            pfx: 'certs/HelpGame Dev Certificates.p12',
+            bundleId: 'com.dokaebi.HelpGame', 
+            production: false
+        }
+  }
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
