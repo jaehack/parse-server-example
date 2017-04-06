@@ -29,3 +29,25 @@ token.identity = identity;
   
   res.success(token.toJwt());
 });
+
+Parse.Cloud.define('hellopush', function(req, res) {
+  	    var channel = (request.params.role == 0 ? "s_" : "t_") + request.params.topicid;
+				var alertmsg = "A " + request.params.categoryname + (request.params.role == 0 ? " teacher" : " student") + " is available."
+				Parse.Push.send({
+					channels: [channel],
+					data: {
+						expiration_interval: 300,
+						alert: alertmsg,
+						topicid: request.params.topicid,
+						role: (request.params.role == 0 ? "t" : "s")
+					}
+				},  {
+				success: function() {
+					alert("Push was successful");
+				},
+				error: function(error) {
+					alert("Push error");
+				}
+				});
+  
+});
